@@ -1,0 +1,52 @@
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build directories
+Debug/
+Debug*/
+Release/
+Release*/
+x64/
+x86/
+ipch/
+*.obj
+*.pch
+*.idb
+*.pdb
+*.exe
+*.dll
+*.lib
+*.app
+*.ilk
+*.out
+
+# CMake build folders (if using CMake)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Other temporary files
+*.log
+*.tlog
+*.lastbuildstate
+*.iobj
+*.ipdb
+*.opensdf
+*.sdf
+
+# JetBrains Rider / ReSharper caches (optional)
+.idea/
+_ReSharper.Caches/
+
+# VS Code (if used)
+.vscode/
+
+# NuGet packages
+*.nupkg
+packages/
