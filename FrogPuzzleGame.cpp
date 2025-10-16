@@ -79,18 +79,19 @@ void frogGameSolver(int n) {
 	const auto startTime = std::chrono::high_resolution_clock::now();
 	searchSolution(game, n, n, moves);
 	const auto endTime = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> executionTime = (endTime - startTime) * 1000;
+	std::chrono::duration<double> executionTime = endTime - startTime;
 	while (!moves.empty()) {
 		std::cout << moves.top() << std::endl;
 		moves.pop();
 	}
 
-	std::cout << "TIMES_MS: alg= " << executionTime.count() << std::endl;
+	std::cout << "Exectuion time of algorithm: " << executionTime.count() << " seconds." << std::endl;
 }
 
 int main() {
 
 	int n;
+	std::cout << "Please enter number: ";
 	std::cin >> n;
 
 	frogGameSolver(n);
