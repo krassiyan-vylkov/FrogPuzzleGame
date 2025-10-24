@@ -25,49 +25,48 @@ bool checkIfSolved(const std::string& game, int n) {
 	return true;
 }
 
-bool searchSolution(std::string& game, int n, int empty, std::stack<std::string>& moves) {
-
+bool searchSolution(std::string& game, int n, int emptyStone, std::stack<std::string>& moves) {
 	if (checkIfSolved(game, n)) {
 		moves.push(game);
 		return true;
 	}
 	int gameSize = game.size();
 
-	if (empty - 1 >= 0 && game[empty - 1] == '>') {
-		std::swap(game[empty], game[empty - 1]);
-		if (searchSolution(game, n, empty - 1, moves)) {
-			std::swap(game[empty], game[empty - 1]);
+	if (emptyStone - 1 >= 0 && game[emptyStone - 1] == '>') {
+		std::swap(game[emptyStone], game[emptyStone - 1]);
+		if (searchSolution(game, n, emptyStone - 1, moves)) {
+			std::swap(game[emptyStone], game[emptyStone - 1]);
 			moves.push(game);
 			return true;
 		}
-		std::swap(game[empty], game[empty - 1]);
+		std::swap(game[emptyStone], game[emptyStone - 1]);
 	}
-	if (empty - 2 >= 0 && game[empty - 2] == '>') {
-		std::swap(game[empty], game[empty - 2]);
-		if (searchSolution(game, n, empty - 2, moves)) {
-			std::swap(game[empty], game[empty - 2]);
+	if (emptyStone - 2 >= 0 && game[emptyStone - 2] == '>') {
+		std::swap(game[emptyStone], game[emptyStone - 2]);
+		if (searchSolution(game, n, emptyStone - 2, moves)) {
+			std::swap(game[emptyStone], game[emptyStone - 2]);
 			moves.push(game);
 			return true;
 		}
-		std::swap(game[empty], game[empty - 2]);
+		std::swap(game[emptyStone], game[emptyStone - 2]);
 	}
-	if (empty + 1 < gameSize && game[empty + 1] == '<') {
-		std::swap(game[empty], game[empty + 1]);
-		if (searchSolution(game, n, empty + 1, moves)) {
-			std::swap(game[empty], game[empty + 1]);
+	if (emptyStone + 1 < gameSize && game[emptyStone + 1] == '<') {
+		std::swap(game[emptyStone], game[emptyStone + 1]);
+		if (searchSolution(game, n, emptyStone + 1, moves)) {
+			std::swap(game[emptyStone], game[emptyStone + 1]);
 			moves.push(game);
 			return true;
 		}
-		std::swap(game[empty], game[empty + 1]);
+		std::swap(game[emptyStone], game[emptyStone + 1]);
 	}
-	if (empty + 2 < gameSize && game[empty + 2] == '<') {
-		std::swap(game[empty], game[empty + 2]);
-		if (searchSolution(game, n, empty + 2, moves)) {
-			std::swap(game[empty], game[empty + 2]);
+	if (emptyStone + 2 < gameSize && game[emptyStone + 2] == '<') {
+		std::swap(game[emptyStone], game[emptyStone + 2]);
+		if (searchSolution(game, n, emptyStone + 2, moves)) {
+			std::swap(game[emptyStone], game[emptyStone + 2]);
 			moves.push(game);
 			return true;
 		}
-		std::swap(game[empty], game[empty + 2]);
+		std::swap(game[emptyStone], game[emptyStone + 2]);
 	}
 
 	return false;
@@ -76,20 +75,20 @@ bool searchSolution(std::string& game, int n, int empty, std::stack<std::string>
 void frogGameSolver(int n) {
 	std::string game = generateGame(n);
 	std::stack<std::string> moves;
+
 	const auto startTime = std::chrono::high_resolution_clock::now();
 	searchSolution(game, n, n, moves);
 	const auto endTime = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> executionTime = (endTime - startTime) * 1000;
+	auto executionTime = std::chrono::duration<double, std::milli>(endTime - startTime);
+
+	std::cout << "# TIMES_MS: alg= " << executionTime.count() << '\n';
 	while (!moves.empty()) {
-		std::cout << moves.top() << std::endl;
+		std::cout << moves.top() << '\n';
 		moves.pop();
 	}
-
-	std::cout << "TIMES_MS: alg= " << executionTime.count() << std::endl;
 }
 
 int main() {
-
 	int n;
 	std::cin >> n;
 
